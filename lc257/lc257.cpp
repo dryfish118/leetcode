@@ -25,27 +25,127 @@
 ************************************************************************/
 
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
+#include <string>
+#include <vector>
 
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     struct TreeNode *left;
- *     struct TreeNode *right;
- * };
- */
+/*
+                5
+             /     \
+            2       8
+          /  \     /  \
+         1    3   6    9
+               \        \
+                4       12
+*/
 
 
- /**
-  * Note: The returned array must be malloced, assume caller calls free().
-  */
-char ** binaryTreePaths(struct TreeNode* root, int* returnSize) {
-	return NULL;
+typedef std::vector<std::string> stringarray;
+typedef stringarray::iterator stringiter;
+typedef stringarray::const_iterator stringciter;
+
+typedef struct TreeNode
+{
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+
+    TreeNode()
+        : val(0)
+        , left(NULL)
+        , right(NULL)
+    {
+    }
+
+    TreeNode(int v)
+        : val(v)
+        , left(NULL)
+        , right(NULL)
+    {
+    }
+
+    ~TreeNode()
+    {
+        if (left)
+        {
+            delete left;
+            left = NULL;
+        }
+        if (right)
+        {
+            delete right;
+            right = NULL;
+        }
+    }
+
+    std::string str()
+    {
+        char tmp[128] = { 0 };
+        _itoa_s(val, tmp, 128, 10);
+        return std::string(tmp);
+    }
+
+}TreeNode;
+
+void dfs(TreeNode* node, std::string path, stringarray& paths)
+{
+    if (node)
+    {
+        if (path.empty())
+        {
+            path += node->str();
+        }
+        else
+        {
+            path += "->" + node->str();
+        }
+
+        if (node->left)
+        {
+            dfs(node->left, path, paths);
+        }
+        if (node->right)
+        {
+            dfs(node->right, path, paths);
+        }
+        else if (!node->left)
+        {
+            paths.push_back(path);
+        }
+    }
+}
+
+void binaryTreePaths(TreeNode* root, stringarray& paths)
+{
+    dfs(root, std::string(), paths);
 }
 
 int main()
 {
-	return 0;
+    TreeNode* root = new TreeNode(5);
+    root->left = new TreeNode(2);
+    root->left->left = new TreeNode(1);
+    root->left->right = new TreeNode(3);
+    root->left->right->right = new TreeNode(4);
+    root->right = new TreeNode(8);
+    root->right->left = new TreeNode(6);
+    root->right->right = new TreeNode(9);
+    root->right->right->right = new TreeNode(12);
+
+    stringarray paths;
+    binaryTreePaths(root, paths);
+    std::cout << "[";
+    for (stringiter i = paths.begin(); i != paths.end(); i++)
+    {
+        if (i != paths.begin())
+        {
+            std::cout << ", ";
+        }
+        std::cout << "\"" << *i << "\"";
+    }
+    std::cout << "]";
+
+    delete root;
+
+    return 0;
 }
