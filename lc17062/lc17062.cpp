@@ -4,16 +4,16 @@
 示例 :
 
 输入: 25
-	输出 : 9
-	解释 : (2, 12, 20, 21, 22, 23, 24, 25)(注意 22 应该算作两次)
+  输出 : 9
+  解释 : (2, 12, 20, 21, 22, 23, 24, 25)(注意 22 应该算作两次)
 
-	提示：
+  提示：
 
-	n <= 10 ^ 9
+  n <= 10 ^ 9
 
-	来源：力扣（LeetCode）
-	链接：https ://leetcode-cn.com/problems/number-of-2s-in-range-lcci
-	著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+  来源：力扣（LeetCode）
+  链接：https ://leetcode-cn.com/problems/number-of-2s-in-range-lcci
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 ************************************************************************/
 
 /************************************************************************
@@ -23,6 +23,16 @@
 20 21 22 23 24 25 26 27 28 29
 30 31 32 33 34 35 36 37 38 39
 
+25 ==> 9
+31 ==> 13
+32 ==> 14
+33 ==> 14
+
+119 ==> 
+120 ==> 
+121 ==> 
+130 ==> 
+131 ==> 
 
 ************************************************************************/
 
@@ -67,7 +77,11 @@ int numberOf2sInRange(int n)
   int diwei = n % ji;
   int gaowei = n / ji;
   int count = gaowei * numberOf2sInRange(ji) + numberOf2sInRange(diwei);
-  if (gaowei >= 2)
+  if (gaowei == 2)
+  {
+    count += diwei + 1;
+  }
+  else if (gaowei > 2)
   {
     count += ji;
   }
@@ -76,10 +90,31 @@ int numberOf2sInRange(int n)
 
 int main(int argc, char** argv)
 {
-	if (argc > 1)
-	{
-		printf("%d\n", numberOf2sInRange(atoi(argv[1])));
-	}
+  for (int i = 1; i < 1000; i++)
+  {
+    printf("i(%d) ==> %d\t", i, numberOf2sInRange(i));
+    if ((i % 5) == 0)
+    {
+      printf("\n");
+    }
+  }
 
-	return 0;
+//   printf("%d\n", numberOf2sInRange(25));
+//   printf("%d\n", numberOf2sInRange(31));
+//   printf("%d\n", numberOf2sInRange(32));
+//   printf("%d\n", numberOf2sInRange(33));
+//  printf("%d\n", numberOf2sInRange(119));
+//   printf("%d\n", numberOf2sInRange(120));
+//   printf("%d\n", numberOf2sInRange(121));
+//   printf("%d\n", numberOf2sInRange(122));
+//   printf("%d\n", numberOf2sInRange(419));
+//   printf("%d\n", numberOf2sInRange(420));
+//   printf("%d\n", numberOf2sInRange(421));
+//   printf("%d\n", numberOf2sInRange(422));
+//   printf("%d\n", numberOf2sInRange(1419));
+//   printf("%d\n", numberOf2sInRange(1420));
+//   printf("%d\n", numberOf2sInRange(1421));
+//   printf("%d\n", numberOf2sInRange(1422));
+
+  return 0;
 }
