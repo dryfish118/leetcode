@@ -47,15 +47,76 @@
 
 ************************************************************************/
 
+#include <cassert>
+#include <string>
+#include <vector>
 
-#include <stdlib.h>
-#include <stdio.h>
+typedef std::vector<std::string> stringarray;
+typedef stringarray::iterator stringiter;
+typedef stringarray::const_iterator stringciter;
 
-char * simplifyPath(char * path) {
-	return path;
+void appendPath(std::string& sPath, const char* p1, const char* p2)
+{
+  if (p2 > p1)
+  {
+    size_t len = p2 - p1;
+    if (len == 1)
+    {
+    }
+    else if (len == 2 && p1[1] == '.')
+    {
+    }
+    else if (len == 3 && p1[1] == '.' && p1[2] == '.')
+    {
+      while (!sPath.empty() && *(sPath.rbegin()) != '/')
+      {
+        sPath.pop_back();
+      }
+      if (!sPath.empty())
+      {
+        sPath.pop_back();
+      }
+    }
+    else
+    {
+      while (p1 < p2)
+      {
+        sPath.push_back(*p1);
+        p1++;
+      }
+    }
+  }
+}
+
+std::string simplifyPath(const std::string& path)
+{
+  std::string sPath;
+  const char* p1 = path.c_str();
+  const char* p2 = p1 + 1;
+  while (*p2)
+  {
+    if (*p2 == '/')
+    {
+      appendPath(sPath, p1, p2);
+      p1 = p2;
+    }
+    p2++;
+  }
+  appendPath(sPath, p1, p2);
+  if (sPath.empty())
+  {
+    sPath = "/";
+  }
+
+	return sPath;
 }
 
 int main()
 {
+  assert(simplifyPath("/home/") == "/home");
+  assert(simplifyPath("/../") == "/");
+  assert(simplifyPath("/home//foo/") == "/home/foo");
+  assert(simplifyPath("/a/./b/../../c/") == "/c");
+  assert(simplifyPath("/a//b////c/d//././/..") == "/a/b/c");
 	return 0;
 }
