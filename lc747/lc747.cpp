@@ -39,10 +39,45 @@
 #include <stdio.h>
 
 int dominantIndex(int* nums, int numsSize) {
-    return 0;
+  int idx = -1;
+  int maxNum = nums[0];
+  for (int i = 1; i < numsSize; i++)
+  {
+    if (nums[i] > maxNum)
+    {
+      if (nums[i] >= maxNum +maxNum)
+      {
+        idx = i;
+      }
+      maxNum = nums[i];
+    }
+    else if (idx != -1 && nums[i] < maxNum && maxNum < nums[i] + nums[i])
+    {
+      idx = -1;
+    }
+  }
+
+  return idx;
 }
 
 int main()
 {
+  {
+    int nums[] = { 3, 6, 1, 0 };
+    printf("%d\n", dominantIndex(nums, sizeof(nums) / sizeof(int)));
+  }
+  {
+    int nums[] = { 3, 6, 1, 5, 0 };
+    printf("%d\n", dominantIndex(nums, sizeof(nums) / sizeof(int)));
+  }
+  {
+    int nums[] = { 2, 3, 6, 1, 5, 0, 15 };
+    printf("%d\n", dominantIndex(nums, sizeof(nums) / sizeof(int)));
+  }
+  {
+    int nums[] = { 3, 6, 1, 0, 15, 4 };
+    printf("%d\n", dominantIndex(nums, sizeof(nums) / sizeof(int)));
+  }
+
 	return 0;
 }
