@@ -30,44 +30,55 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int get2(int n)
+int numberOf2sInRange(int n)
 {
-	if (n < 2)
-	{
-		return 0;
-	}
-	else if (n < 10)
-	{
-		return 1;
-	}
-	else
-	{
-		int t = n;
-		int c = 1;
-		while (t >= 10)
-		{
-			t /= 10;
-			c *= 10;
-		}
+  switch (n)
+  {
+  case 0:
+  case 1:
+    return 0;
+  case 2:
+  case 3:
+  case 4:
+  case 5:
+  case 6:
+  case 7:
+  case 8:
+  case 9:
+  case 10:
+    return 1;
+  case 100:
+  case 1000:
+  case 10000:
+  case 100000:
+  case 1000000:
+  case 10000000:
+  case 100000000:
+  case 1000000000:
+    return 10 * (numberOf2sInRange(n / 10) + 1);
+  }
 
-		int count = t * (get2(n - t * c) + 1);
-		if (n >= 2)
-		{
-			count = count << 1;
-		}
-		return count;
-	}
-}
+  int ji = 10;
+  while (n / ji > 10)
+  {
+    ji *= 10;
+  }
 
-int numberOf2sInRange(int n) {
-	return 0;
+  int diwei = n % ji;
+  int gaowei = n / ji;
+  int count = gaowei * numberOf2sInRange(ji) + numberOf2sInRange(diwei);
+  if (gaowei >= 2)
+  {
+    count += ji;
+  }
+  return count;
 }
 
 int main(int argc, char** argv)
 {
 	if (argc > 1)
 	{
-		printf("%d\n", get2(atoi(argv[1])));
+		printf("%d\n", numberOf2sInRange(atoi(argv[1])));
 	}
 
 	return 0;
