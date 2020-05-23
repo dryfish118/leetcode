@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="task">
+      <UniqueIdentifier>{5a0193f4-560f-497c-8c18-a852d8ca4a2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="review">
+      <UniqueIdentifier>{568fd516-0153-477d-a888-583dba37b5c2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\stdafx.h" />
+    <ClInclude Include="..\treenode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\task\0001.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0049.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0071.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0257.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0279.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0617.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0747.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stdafx.cpp" />
+    <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="..\review\1706.cpp">
+      <Filter>review</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
