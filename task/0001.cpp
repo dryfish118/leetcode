@@ -21,16 +21,39 @@
 
 #include "stdafx.h"
 
-class Solution
+pair<int, int> twoSum(const vector<int>& nums, int target)
 {
-public:
-  vector<int> twoSum(vector<int>& nums, int target) {
-    return nums;
+  map<int, int> bu;
+  for (int i = 0; i < (int)nums.size(); i++)
+  {
+    map<int, int>::iterator it = bu.find(nums[i]);
+    if (it == bu.end())
+    {
+      bu.insert(make_pair(target - nums[i], i));
+    }
+    else
+    {
+      return make_pair(it->second, i);
+    }
   }
-};
+  return make_pair(-1, -1);
+}
 
 void lc0001()
 {
-  
-	
+  vector<int> nums;
+  nums.push_back(2);
+  nums.push_back(7);
+  nums.push_back(11);
+  nums.push_back(16);
+  nums.push_back(27);
+  nums.push_back(36);
+  nums.push_back(55);
+  nums.push_back(58);
+  int target = 38;
+
+  pair<int, int> r = twoSum(nums, target);
+  cout << r.first << " " << r.second;
+  assert(r.first == 2);
+  assert(r.second == 4);
 }
