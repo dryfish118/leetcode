@@ -29,58 +29,7 @@
 
 ************************************************************************/
 
-
-#include <iostream>
-#include <string>
-#include <vector>
-
-typedef std::vector<std::string> stringarray;
-typedef stringarray::iterator stringiter;
-typedef stringarray::const_iterator stringciter;
-
-typedef struct TreeNode
-{
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-
-    TreeNode()
-        : val(0)
-        , left(NULL)
-        , right(NULL)
-    {
-    }
-
-    TreeNode(int v)
-        : val(v)
-        , left(NULL)
-        , right(NULL)
-    {
-    }
-
-    ~TreeNode()
-    {
-        if (left)
-        {
-            delete left;
-            left = NULL;
-        }
-        if (right)
-        {
-            delete right;
-            right = NULL;
-        }
-    }
-
-    std::string str()
-    {
-        char tmp[128] = { 0 };
-        _itoa_s(val, tmp, 128, 10);
-        return std::string(tmp);
-    }
-
-}TreeNode;
-
+#include "stdafx.h"
 
 TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2)
 {
@@ -106,40 +55,7 @@ TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2)
 	return t;
 }
 
-void dfs(TreeNode* node, std::string path, stringarray& paths)
-{
-  if (node)
-  {
-    if (path.empty())
-    {
-      path += node->str();
-    }
-    else
-    {
-      path += "->" + node->str();
-    }
-
-    if (node->left)
-    {
-      dfs(node->left, path, paths);
-    }
-    if (node->right)
-    {
-      dfs(node->right, path, paths);
-    }
-    else if (!node->left)
-    {
-      paths.push_back(path);
-    }
-  }
-}
-
-void binaryTreePaths(TreeNode* root, stringarray& paths)
-{
-  dfs(root, std::string(), paths);
-}
-
-int main()
+void lc0617()
 {
   TreeNode* root1 = new TreeNode(1);
   root1->left = new TreeNode(3);
@@ -156,20 +72,18 @@ int main()
 
   stringarray paths;
   binaryTreePaths(root, paths);
-  std::cout << "[";
+  cout << "[";
   for (stringiter i = paths.begin(); i != paths.end(); i++)
   {
     if (i != paths.begin())
     {
-      std::cout << ", ";
+      cout << ", ";
     }
-    std::cout << "\"" << *i << "\"";
+    cout << "\"" << *i << "\"";
   }
-  std::cout << "]";
+  cout << "]";
 
   delete root;
   delete root1;
   delete root2;
-
-	return 0;
 }

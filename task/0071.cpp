@@ -47,15 +47,9 @@
 
 ************************************************************************/
 
-#include <cassert>
-#include <string>
-#include <vector>
+#include "stdafx.h"
 
-typedef std::vector<std::string> stringarray;
-typedef stringarray::iterator stringiter;
-typedef stringarray::const_iterator stringciter;
-
-void appendPath(std::string& sPath, const char* p1, const char* p2)
+void appendPath(string& sPath, const char* p1, const char* p2)
 {
   if (p2 > p1)
   {
@@ -88,9 +82,9 @@ void appendPath(std::string& sPath, const char* p1, const char* p2)
   }
 }
 
-std::string simplifyPath(const std::string& path)
+string simplifyPath(const string& path)
 {
-  std::string sPath;
+  string sPath;
   const char* p1 = path.c_str();
   const char* p2 = p1 + 1;
   while (*p2)
@@ -111,12 +105,11 @@ std::string simplifyPath(const std::string& path)
 	return sPath;
 }
 
-int main()
+void lc0071()
 {
   assert(simplifyPath("/home/") == "/home");
   assert(simplifyPath("/../") == "/");
   assert(simplifyPath("/home//foo/") == "/home/foo");
   assert(simplifyPath("/a/./b/../../c/") == "/c");
   assert(simplifyPath("/a//b////c/d//././/..") == "/a/b/c");
-	return 0;
 }

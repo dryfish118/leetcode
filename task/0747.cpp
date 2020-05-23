@@ -34,9 +34,7 @@
 
 ************************************************************************/
 
-
-#include <stdlib.h>
-#include <stdio.h>
+#include "stdafx.h"
 
 int dominantIndex(int* nums, int numsSize) {
   int idx = -1;
@@ -60,7 +58,7 @@ int dominantIndex(int* nums, int numsSize) {
   return idx;
 }
 
-int main()
+void lc0747()
 {
   {
     int nums[] = { 3, 6, 1, 0 };
@@ -78,6 +76,4 @@ int main()
     int nums[] = { 3, 6, 1, 0, 15, 4 };
     printf("%d\n", dominantIndex(nums, sizeof(nums) / sizeof(int)));
   }
-
-	return 0;
 }

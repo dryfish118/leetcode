@@ -23,23 +23,9 @@
 
 ************************************************************************/
 
+#include "stdafx.h"
 
-#include <iostream>
-#include <string>
-#include <vector>
-#include <map>
-#include <set>
-
-typedef std::vector<std::string> stringarray;
-typedef stringarray::iterator stringiter;
-typedef stringarray::const_iterator stringciter;
-typedef std::vector<stringarray> stringarrayarray;
-typedef stringarrayarray::iterator stringarrayiter;
-typedef std::set<char> charset;
-typedef std::map<charset, stringarray> stringarraymap;
-typedef stringarraymap::iterator stringarraymapiter;
-
-charset hashString(const std::string& str)
+charset hashString(const string& str)
 {
 	charset chs;
 	for (size_t i = 0; i < str.length(); i++)
@@ -60,7 +46,7 @@ void groupAnagrams(const stringarray& strs, stringarrayarray& rets)
 		{
 			stringarray a;
 			a.push_back(*i);
-			m.insert(std::make_pair(key, a));
+			m.insert(make_pair(key, a));
 		}
 		else
 		{
@@ -74,7 +60,7 @@ void groupAnagrams(const stringarray& strs, stringarrayarray& rets)
 	}
 }
 
-int main()
+void lc0049()
 {
 	stringarray strs;
 	strs.push_back("eat");
@@ -86,23 +72,21 @@ int main()
 	stringarrayarray rets;
 	groupAnagrams(strs, rets);
 
-	std::cout << "[" << std::endl;
+	cout << "[" << endl;
 	int count = 1;
 	for (stringarrayiter i = rets.begin(); i != rets.end(); i++)
 	{
 		stringarray& sa = *i;
-		std::cout << "  [";
+		cout << "  [";
 		for (stringiter j = sa.begin(); j != sa.end(); j++)
 		{
 			if (j != sa.begin())
 			{
-				std::cout << ",";
+				cout << ",";
 			}
-			std::cout << "\"" << *j << "\"";
+			cout << "\"" << *j << "\"";
 		}
-		std::cout << "]" << std::endl;
+		cout << "]" << endl;
 	}
-	std::cout << "]" << std::endl;
-	
-	return 0;
+	cout << "]" << endl;
 }

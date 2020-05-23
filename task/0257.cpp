@@ -24,11 +24,6 @@
 
 ************************************************************************/
 
-
-#include <iostream>
-#include <string>
-#include <vector>
-
 /*
                 5
              /     \
@@ -39,55 +34,9 @@
                 4       12
 */
 
+#include "stdafx.h"
 
-typedef std::vector<std::string> stringarray;
-typedef stringarray::iterator stringiter;
-typedef stringarray::const_iterator stringciter;
-
-typedef struct TreeNode
-{
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-
-    TreeNode()
-        : val(0)
-        , left(NULL)
-        , right(NULL)
-    {
-    }
-
-    TreeNode(int v)
-        : val(v)
-        , left(NULL)
-        , right(NULL)
-    {
-    }
-
-    ~TreeNode()
-    {
-        if (left)
-        {
-            delete left;
-            left = NULL;
-        }
-        if (right)
-        {
-            delete right;
-            right = NULL;
-        }
-    }
-
-    std::string str()
-    {
-        char tmp[128] = { 0 };
-        _itoa_s(val, tmp, 128, 10);
-        return std::string(tmp);
-    }
-
-}TreeNode;
-
-void dfs(TreeNode* node, std::string path, stringarray& paths)
+void dfs(TreeNode* node, string path, stringarray& paths)
 {
     if (node)
     {
@@ -117,10 +66,10 @@ void dfs(TreeNode* node, std::string path, stringarray& paths)
 
 void binaryTreePaths(TreeNode* root, stringarray& paths)
 {
-    dfs(root, std::string(), paths);
+    dfs(root, string(), paths);
 }
 
-int main()
+void lc0257()
 {
     TreeNode* root = new TreeNode(5);
     root->left = new TreeNode(2);
@@ -134,18 +83,16 @@ int main()
 
     stringarray paths;
     binaryTreePaths(root, paths);
-    std::cout << "[";
+    cout << "[";
     for (stringiter i = paths.begin(); i != paths.end(); i++)
     {
         if (i != paths.begin())
         {
-            std::cout << ", ";
+            cout << ", ";
         }
-        std::cout << "\"" << *i << "\"";
+        cout << "\"" << *i << "\"";
     }
-    std::cout << "]";
+    cout << "]";
 
     delete root;
-
-    return 0;
 }

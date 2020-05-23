@@ -12,7 +12,7 @@
   n <= 10 ^ 9
 
   来源：力扣（LeetCode）
-  链接：https ://leetcode-cn.com/problems/number-of-2s-in-range-lcci
+  链接：https://leetcode-cn.com/problems/number-of-2s-in-range-lcci
   著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 ************************************************************************/
 
@@ -36,9 +36,7 @@
 
 ************************************************************************/
 
-
-#include <stdlib.h>
-#include <stdio.h>
+#include "stdafx.h"
 
 int numberOf2sInRange(int n)
 {
@@ -88,7 +86,7 @@ int numberOf2sInRange(int n)
   return count;
 }
 
-int main(int argc, char** argv)
+void rv1706()
 {
   for (int i = 1; i < 1000; i++)
   {
@@ -115,6 +113,4 @@ int main(int argc, char** argv)
 //   printf("%d\n", numberOf2sInRange(1420));
 //   printf("%d\n", numberOf2sInRange(1421));
 //   printf("%d\n", numberOf2sInRange(1422));
-
-  return 0;
 }

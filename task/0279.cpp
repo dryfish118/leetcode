@@ -20,9 +20,7 @@
 
 ************************************************************************/
 
-
-#include <math.h>
-#include <iostream>
+#include "stdafx.h"
 
 /*
 
@@ -67,24 +65,22 @@ void numSquares(int n)
 	if (jieyu > 0)
 	{
 		numSquares(jieyu);
-		std::cout << " ";
+		cout << " ";
 	}
-	std::cout << quzheng;
+	cout << quzheng;
 }
 
-int main()
+void lc0279()
 {
-	std::cout << "12: ";
+	cout << "12: ";
 	numSquares(12);
-	std::cout << std::endl;
+	cout << endl;
 
-	std::cout << "13: ";
+	cout << "13: ";
 	numSquares(13);
-	std::cout << std::endl;
+	cout << endl;
 
-	std::cout << "31: ";
+	cout << "31: ";
 	numSquares(31);
-	std::cout << std::endl;
-
-	return 0;
+	cout << endl;
 }
