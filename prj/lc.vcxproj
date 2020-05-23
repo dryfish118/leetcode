@@ -22,6 +22,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\task\0001.cpp" />
+    <ClCompile Include="..\task\0002.cpp" />
+    <ClCompile Include="..\task\0003.cpp" />
+    <ClCompile Include="..\task\0004.cpp" />
+    <ClCompile Include="..\task\0005.cpp" />
+    <ClCompile Include="..\task\0006.cpp" />
+    <ClCompile Include="..\task\0007.cpp" />
+    <ClCompile Include="..\task\0008.cpp" />
+    <ClCompile Include="..\task\0009.cpp" />
+    <ClCompile Include="..\task\0010.cpp" />
+    <ClCompile Include="..\task\0011.cpp" />
     <ClCompile Include="..\task\0049.cpp" />
     <ClCompile Include="..\task\0071.cpp" />
     <ClCompile Include="..\task\0257.cpp" />

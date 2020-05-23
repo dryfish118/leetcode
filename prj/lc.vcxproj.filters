@@ -39,5 +39,35 @@
     <ClCompile Include="..\review\1706.cpp">
       <Filter>review</Filter>
     </ClCompile>
+    <ClCompile Include="..\task\0002.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0003.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0004.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0005.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0006.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0007.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0008.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0009.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0010.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
+    <ClCompile Include="..\task\0011.cpp">
+      <Filter>task</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
