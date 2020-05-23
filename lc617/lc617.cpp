@@ -30,24 +30,146 @@
 ************************************************************************/
 
 
-#include <stdlib.h>
-#include <stdio.h>
+#include <iostream>
+#include <string>
+#include <vector>
 
-/**
- * Definition for a binary tree node.
- **/
-struct TreeNode {
+typedef std::vector<std::string> stringarray;
+typedef stringarray::iterator stringiter;
+typedef stringarray::const_iterator stringciter;
+
+typedef struct TreeNode
+{
     int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
-};
+    TreeNode *left;
+    TreeNode *right;
+
+    TreeNode()
+        : val(0)
+        , left(NULL)
+        , right(NULL)
+    {
+    }
+
+    TreeNode(int v)
+        : val(v)
+        , left(NULL)
+        , right(NULL)
+    {
+    }
+
+    ~TreeNode()
+    {
+        if (left)
+        {
+            delete left;
+            left = NULL;
+        }
+        if (right)
+        {
+            delete right;
+            right = NULL;
+        }
+    }
+
+    std::string str()
+    {
+        char tmp[128] = { 0 };
+        _itoa_s(val, tmp, 128, 10);
+        return std::string(tmp);
+    }
+
+}TreeNode;
 
 
-struct TreeNode* mergeTrees(struct TreeNode* t1, struct TreeNode* t2) {
-	return NULL;
+TreeNode* mergeTrees(TreeNode* t1, TreeNode* t2)
+{
+  TreeNode* t = NULL;
+  if (t1 && t2)
+  {
+    t = new TreeNode(t1->val + t2->val);
+    t->left = mergeTrees(t1->left, t2->left);
+    t->right = mergeTrees(t1->right, t2->right);
+  }
+  else if (t1)
+  {
+    t = new TreeNode(t1->val);
+    t->left = mergeTrees(t1->left, NULL);
+    t->right = mergeTrees(t1->right, NULL);
+  }
+  else if (t2)
+  {
+    t = new TreeNode(t2->val);
+    t->left = mergeTrees(NULL, t2->left);
+    t->right = mergeTrees(NULL, t2->right);
+  }
+	return t;
+}
+
+void dfs(TreeNode* node, std::string path, stringarray& paths)
+{
+  if (node)
+  {
+    if (path.empty())
+    {
+      path += node->str();
+    }
+    else
+    {
+      path += "->" + node->str();
+    }
+
+    if (node->left)
+    {
+      dfs(node->left, path, paths);
+    }
+    if (node->right)
+    {
+      dfs(node->right, path, paths);
+    }
+    else if (!node->left)
+    {
+      paths.push_back(path);
+    }
+  }
+}
+
+void binaryTreePaths(TreeNode* root, stringarray& paths)
+{
+  dfs(root, std::string(), paths);
 }
 
 int main()
 {
+  TreeNode* root1 = new TreeNode(1);
+  root1->left = new TreeNode(3);
+  root1->left->left = new TreeNode(5);
+  root1->right = new TreeNode(2);
+
+  TreeNode* root2 = new TreeNode(2);
+  root2->left = new TreeNode(1);
+  root2->left->right = new TreeNode(4);
+  root2->right = new TreeNode(3);
+  root2->right->right = new TreeNode(7);
+
+  TreeNode* root = mergeTrees(root1, root2);
+
+  stringarray paths;
+  binaryTreePaths(root, paths);
+  std::cout << "[";
+  for (stringiter i = paths.begin(); i != paths.end(); i++)
+  {
+    if (i != paths.begin())
+    {
+      std::cout << ", ";
+    }
+    std::cout << "\"" << *i << "\"";
+  }
+  std::cout << "]";
+
+  delete root;
+  delete root1;
+  delete root2;
+
 	return 0;
 }
