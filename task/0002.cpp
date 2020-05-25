@@ -20,20 +20,74 @@
 
 #include "stdafx.h"
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     struct ListNode *next;
- * };
- */
 
+typedef struct ListNode
+{
+    int val;
+    ListNode *next;
+    
+    ListNode()
+      : val(0)
+      , next(NULL)
+    {}
 
-struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
-  return 0;
+    ListNode(int v)
+      : val(v)
+      , next(NULL)
+    {}
+
+    ~ListNode()
+    {
+      if (next)
+      {
+        delete next;
+        next = NULL;
+      }
+    }
+}ListNode;
+
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2, int jinwei)
+{
+  if (l1 == NULL && l2 == NULL && jinwei == 0)
+  {
+    return NULL;
+  }
+
+  int v1 = l1 ? l1->val : 0;
+  int v2 = l2 ? l2->val : 0;
+  int sumVal = v1 + v2 + jinwei;
+  if (sumVal >= 10)
+  {
+    jinwei = 1;
+    sumVal -= 10;
+  }
+  else
+  {
+    jinwei = 0;
+  }
+  ListNode* l = new ListNode(sumVal);
+  l->next = addTwoNumbers(l1 ? l1->next : NULL, l2 ? l2->next : NULL, jinwei);
+  return l;
 }
 
 void lc0002()
 {
+  ListNode* n1 = new ListNode(2);
+  n1->next = new ListNode(4);
+  n1->next->next = new ListNode(3);
+  ListNode* n2 = new ListNode(5);
+  n2->next = new ListNode(6);
+  n2->next->next = new ListNode(4);
 
+  ListNode* n3 = addTwoNumbers(n1, n2, 0);
+  assert(n3 != NULL);
+  assert(n3->val == 7);
+  assert(n3->next != NULL);
+  assert(n3->next->val == 0);
+  assert(n3->next->next != NULL);
+  assert(n3->next->next->val == 8);
+
+  delete n3;
+  delete n2;
+  delete n1;
 }
