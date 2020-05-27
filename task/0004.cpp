@@ -30,11 +30,67 @@ nums2 = [3, 4]
 
 #include "stdafx.h"
 
-double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size) {
-  return 0;
+int nextNum(int* nums1, int nums1Size, int* nums2, int nums2Size, int* n1, int* n2)
+{
+  if (*n1 < nums1Size && *n2 < nums2Size)
+  {
+    if (nums1[*n1] <= nums2[*n2])
+    {
+      return nums1[(*n1)++];
+    }
+    else
+    {
+      return nums2[(*n2)++];
+    }
+  }
+  else if (*n1 < nums1Size)
+  {
+    return nums1[(*n1)++];
+  }
+  else
+  {
+    return nums2[(*n2)++];
+  }
+}
+
+double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size)
+{
+  int n1 = 0, n2 = 0;
+  int count = (nums1Size + nums2Size) / 2;
+  if ((nums1Size + nums2Size) % 2)
+  {
+    count++;
+  }
+
+  int first = 0, second = 0;
+  while (n1 + n2 < count)
+  {
+    first = nextNum(nums1, nums1Size, nums2, nums2Size, &n1, &n2);
+  }
+
+  if (((nums1Size + nums2Size) % 2) == 0)
+  {
+    second = nextNum(nums1, nums1Size, nums2, nums2Size, &n1, &n2);
+    return (first + second) / 2.f;
+  }
+  else
+  {
+    return first;
+  }
 }
 
 void lc0004()
 {
-
+  {
+    int nums1[] = { 1, 3 };
+    int nums2[] = { 2 };
+    double m = findMedianSortedArrays(nums1, 2, nums2, 1);
+    assert(m == 2.0);
+  }
+  {
+    int nums1[] = { 1, 2 };
+    int nums2[] = { 3, 4 };
+    double m = findMedianSortedArrays(nums1, 2, nums2, 2);
+    assert(m == 2.5);
+  }
 }
